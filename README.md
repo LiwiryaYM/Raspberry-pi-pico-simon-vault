@@ -1,7 +1,7 @@
 # Raspberry Pi Pico: Simon Vault
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Platform: Wokwi](https://img.shields.io/badge/Platform-Wokwi-blue)](https://wokwi.com/projects/449697556937651201)
+[![Platform: Wokwi](https://img.shields.io/badge/Platform-Wokwi-blue)](https://pornhub.com)
 [![Language: MicroPython](https://img.shields.io/badge/Language-MicroPython-orange)](https://micropython.org/)
 
 **Simon Vault** adalah proyek simulasi *embedded system* ganda yang menggabungkan sistem keamanan digital (keypad lock) dengan permainan memori klasik "Simon Says". Proyek ini mendemonstrasikan logika *state machine*, penanganan input/output kompleks, dan penggunaan modul display (LCD & 7-Segment) menggunakan MicroPython.
