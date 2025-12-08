@@ -1,127 +1,143 @@
-# 🔒 Raspberry Pi Pico Simon Vault
+# Raspberry Pi Pico: Simon Vault
 
-<p align="center">
-  <img src="https://dummyimage.com/800x300/2c3e50/ffffff&text=Wokwi+Simulation+Screenshot+Placeholder" alt="Project Banner" width="100%" />
-</p>
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Platform: Wokwi](https://img.shields.io/badge/Platform-Wokwi-blue)](https://wokwi.com/projects/449697556937651201)
+[![Language: MicroPython](https://img.shields.io/badge/Language-MicroPython-orange)](https://micropython.org/)
 
-<p align="center">
-    <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square" alt="Status">
-    <img src="https://img.shields.io/badge/Language-MicroPython-blue?style=flat-square&logo=python" alt="Language">
-    <img src="https://img.shields.io/badge/Platform-Wokwi-orange?style=flat-square" alt="Platform">
-    <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="License">
-</p>
-
-<p align="center">
-  <strong>Sistem Keamanan & Game Memori Interaktif Berbasis IoT</strong>
-</p>
-<p align="center">
-  <a href="https://wokwi.com/projects/449697556937651201">
-    <img src="https://avatars.githubusercontent.com/u/65966273?s=40&v=4" width="30" height="30" align="center" />
-    <b>Coba Simulasi Langsung di Wokwi</b>
-  </a>
-</p>
+**Simon Vault** adalah proyek simulasi *embedded system* ganda yang menggabungkan sistem keamanan digital (keypad lock) dengan permainan memori klasik "Simon Says". Proyek ini mendemonstrasikan logika *state machine*, penanganan input/output kompleks, dan penggunaan modul display (LCD & 7-Segment) menggunakan MicroPython.
 
 ---
 
-## 📖 Tentang Proyek
-
-**Raspberry Pi Pico Simon Vault** adalah proyek simulasi interaktif yang menggabungkan konsep sistem keamanan digital dengan permainan memori elektronik klasik "Simon Says".
-
-Proyek ini didesain sebagai demonstrasi penggunaan mikrokontroler untuk menangani multiple input (tombol), multiple output visual (LED & berbagai jenis layar), serta logika pemrograman state-machine menggunakan **MicroPython**.
-
----
-
-## 🌟 Fitur Utama
-
-Project ini memiliki dua mode operasi utama yang saling terhubung:
-
-### 1. 🛡️ Security Vault Mode (Mode Brankas)
-Mode default saat perangkat dinyalakan. Sistem terkunci dan meminta otentikasi.
-* **Input PIN:** Membutuhkan kombinasi 4-tombol yang tepat untuk membuka.
-* **Indikator Status:** Menggunakan LCD 20x4 untuk instruksi teks dan 7-Segment Display untuk menampilkan digit tersembunyi (*).
-* **Feedback Visual:** LED berkedip sebagai respon saat tombol ditekan.
-
-### 2. 🎮 Simon Says Game Mode
-Mode permainan yang aktif otomatis setelah brankas berhasil dibuka.
-* **Tantangan Memori:** Sistem menghasilkan urutan nyala LED acak.
-* **Level Progresif:** Tingkat kesulitan (panjang urutan) meningkat setiap kali pemain berhasil meniru pola.
-* **Real-time Scoring:** Skor (Level saat ini) ditampilkan langsung pada 7-Segment Display.
-* **Visual Effects:** Animasi khusus untuk "Correct Answer" dan "Game Over".
+## 📋 Daftar Isi
+1. [Gambaran Proyek](#-gambaran-proyek)
+2. [Teknologi yang Digunakan](#-teknologi-yang-digunakan)
+3. [Konfigurasi Pin (Wiring)](#-konfigurasi-pin-wiring)
+4. [Prasyarat & Instalasi](#-prasyarat--instalasi)
+5. [Panduan Penggunaan](#-panduan-penggunaan)
+6. [Struktur File](#-struktur-file)
+7. [Lisensi](#-lisensi)
 
 ---
 
-## 🛠️ Teknologi & Komponen
+## 🔭 Gambaran Proyek
 
-Proyek ini dibangun menggunakan ekosistem teknologi berikut:
+Sistem ini memiliki dua mode operasi utama:
 
-| Teknologi / Komponen | Ikon | Deskripsi & Pinout (GP) |
-| :--- | :---: | :--- |
-| **Raspberry Pi Pico W** | <img src="https://www.raspberrypi.com/app/uploads/2022/02/COLOUR-Raspberry-Pi-Symbol-Registered.png" width="35"/> | Mikrokontroler utama sebagai otak sistem. |
-| **MicroPython** | <img src="https://micropython.org/static/img/M-dark-128.png" width="35"/> | Bahasa pemrograman yang digunakan untuk logika kontrol. |
-| **Wokwi Simulator** | <img src="https://avatars.githubusercontent.com/u/65966273?s=40&v=4" width="35"/> | Platform simulasi perangkat keras secara online. |
-| **I2C LCD 20x4** | 📟 | Menampilkan status dan instruksi game. <br> `SDA: GP4`, `SCL: GP5` |
-| **7-Segment Display** | 🔢 | Menampilkan input password & skor level. <br> `GP0, 1, 6, 7, 8, 9, 14` |
-| **LEDs (Merah, Hijau, Biru, Kuning)** | 💡 | Output visual utama untuk game Simon Says. <br> `GP16, GP17, GP18, GP19` |
-| **Pushbuttons (x4)** | 🔘 | Input user untuk password dan kontrol game. <br> `GP10, GP11, GP12, GP13` |
+1.  **Vault Mode (Mode Keamanan):**
+    Saat dinyalakan, sistem berada dalam keadaan terkunci. Pengguna harus memasukkan kombinasi 4 digit PIN yang benar melalui tombol fisik untuk membuka akses.
+
+2.  **Game Mode (Simon Says):**
+    Setelah autentikasi berhasil, sistem beralih ke mode permainan. Mikroprosesor akan menghasilkan urutan pola lampu LED yang harus diulangi oleh pengguna. Kesulitan (level) akan meningkat setiap kali pengguna berhasil meniru pola dengan benar.
+
+**Fitur Utama:**
+* Autentikasi PIN 4-digit.
+* Tampilan status *real-time* pada LCD 20x4 (I2C).
+* Indikator skor dan input tersembunyi menggunakan 7-Segment Display.
+* Algoritma permainan memori dengan peningkatan level tanpa batas.
+* Animasi visual untuk status *Success*, *Error*, dan *Game Over*.
 
 ---
 
-## 📂 Susunan Project
+## 🛠 Teknologi yang Digunakan
 
-Struktur file dalam repositori ini diatur untuk kemudahan penggunaan di Wokwi maupun hardware fisik:
+<p align="left">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Raspberry_Pi_-_Logo.svg" width="40" alt="Raspberry Pi" style="margin-right: 15px;"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" width="40" alt="MicroPython" style="margin-right: 15px;"/>
+  <img src="https://raw.githubusercontent.com/wokwi/wokwi-features/main/assets/logo.svg" width="40" alt="Wokwi"/>
+</p>
+
+* **Hardware:** Raspberry Pi Pico W
+* **Bahasa Pemrograman:** MicroPython
+* **Platform Simulasi:** Wokwi
+* **Library:** `pico_i2c_lcd` (Driver untuk LCD I2C)
+
+---
+
+## 🔌 Konfigurasi Pin (Wiring)
+
+Berikut adalah pemetaan pin GPIO yang digunakan dalam kode `main.py`. Pastikan rangkaian Anda sesuai dengan tabel ini:
+
+| Komponen | Pin Device | Raspberry Pi Pico (GP) | Keterangan |
+| :--- | :--- | :--- | :--- |
+| **I2C LCD** | SDA | `GP4` | Display Instruksi |
+| | SCL | `GP5` | |
+| **Tombol (Input)** | Btn 1 | `GP11` | Pull-up Internal |
+| | Btn 2 | `GP12` | Pull-up Internal |
+| | Btn 3 | `GP13` | Pull-up Internal |
+| | Btn 4 | `GP10` | Pull-up Internal |
+| **LED (Output)** | Merah | `GP16` | Indikator Game |
+| | Hijau | `GP17` | |
+| | Biru | `GP18` | |
+| | Kuning | `GP19` | |
+| **7-Segment** | A, B | `GP0`, `GP1` | Skor & Input Mask |
+| | C, D, E | `GP6`, `GP7`, `GP8` | |
+| | F, G | `GP9`, `GP14` | |
+
+---
+
+## 📥 Prasyarat & Instalasi
+
+### Opsi 1: Simulasi Online (Disarankan)
+Anda dapat langsung menjalankan proyek ini tanpa instalasi software apapun melalui browser:
+👉 **[Buka Simulasi di Wokwi](https://wokwi.com/projects/449697556937651201)**
+
+### Opsi 2: Menjalankan di Hardware Fisik
+
+1.  **Siapkan Lingkungan Kerja:**
+    * Install [Thonny IDE](https://thonny.org/).
+    * Flash firmware MicroPython terbaru ke Raspberry Pi Pico Anda.
+
+2.  **Clone Repository:**
+    ```bash
+    git clone [https://github.com/liwiryaym/raspberry-pi-pico-simon-vault-.git](https://github.com/liwiryaym/raspberry-pi-pico-simon-vault-.git)
+    ```
+
+3.  **Upload File ke Pico:**
+    Buka Thonny IDE, lalu upload file berikut ke root direktori Pico:
+    * `pico_i2c_lcd.py` (Library wajib)
+    * `main.py` (Program utama)
+
+4.  **Jalankan:**
+    Buka `main.py` dan klik tombol **Run**.
+
+---
+
+## 📖 Panduan Penggunaan
+
+### Tahap 1: Membuka Brankas (Unlock)
+Saat program dimulai, layar menampilkan `-INPUT PASSWORD-`. Masukkan kode default berikut (sesuai urutan wiring tombol):
+
+> **Kombinasi:** Tombol 1 ➔ Tombol 3 ➔ Tombol 2 ➔ Tombol 4
+
+* *Catatan Teknis:* Password didefinisikan dalam variabel `PASSWORD = [0, 2, 1, 3]` pada `main.py`, yang mereferensikan indeks pada list `btns`.
+
+### Tahap 2: Bermain Simon Says
+Jika password benar, LCD akan menampilkan "SAFE OPEN" dan permainan dimulai.
+1.  **Perhatikan (Watch):** LED akan menyala dengan urutan tertentu.
+2.  **Ulangi (Repeat):** Tekan tombol yang sesuai dengan warna LED tersebut.
+3.  **Skor:** Level Anda saat ini ditampilkan pada layar 7-Segment.
+4.  **Game Over:** Jika salah menekan, permainan berakhir dan skor ditampilkan.
+
+---
+
+## 📂 Struktur File
 
 ```text
-📦 raspberry-pi-pico-simon-vault
- ┣ 📜 main.py           
- ┣ 📜 pico_i2c_lcd.py   
- ┣ 📜 diagram.json      
- ┣ 📜 LICENSE           
- ┗ 📜 README.md        
+.
+├── diagram.json        # Skema rangkaian untuk simulator Wokwi
+├── main.py             # Logika utama (Boot, Vault System, Game Loop)
+├── pico_i2c_lcd.py     # Library driver untuk I2C LCD
+├── wokwi-project.txt   # Metadata konfigurasi Wokwi
+└── README.md           # Dokumentasi proyek
 ````
 
 -----
 
-## 🚀 Panduan Instalasi & Penggunaan
+## 📄 Lisensi
 
-### Prasyarat
+Proyek ini didistribusikan di bawah lisensi **MIT**. Anda bebas menggunakan, memodifikasi, dan mendistribusikan ulang kode ini.
+Lihat file [LICENSE](https://www.google.com/search?q=./LICENSE) untuk detail lengkap.
 
-  * **Simulator:** Akun [Wokwi](https://wokwi.com) (Gratis).
-  * **Hardware Fisik (Opsional):** Raspberry Pi Pico, Kabel data, Thonny IDE, dan komponen elektronik sesuai tabel di atas.
-
-### Cara Menjalankan (Simulasi)
-
-1.  Buka tautan proyek Wokwi di bagian atas halaman ini.
-2.  Klik tombol **Play** (▶️) berwarna hijau di simulator Wokwi.
-3.  Sistem akan mulai booting.
-
-### Cara Bermain
-
-#### Tahap 1: Membuka Brankas
-
-Layar akan menampilkan `-MASUKAN PASSWORD-`. Masukkan kode default berikut menggunakan tombol yang tersedia:
-
-> **Password:** Tombol 1 → Tombol 3 → Tombol 2 → Tombol 4
-> (Urutan Pin: GP11 → GP13 → GP12 → GP10)
-
-  * ✅ **Sukses:** Layar LCD menampilkan "AKSES TERBUKA", 7-Segment menampilkan 'O', dan game dimulai.
-  * ❌ **Gagal:** Layar LCD menampilkan "ERROR", 7-Segment menampilkan 'E', silakan coba lagi.
-
-#### Tahap 2: Simon Says
-
-Setelah terbuka, ikuti instruksi di LCD:
-
-1.  **Watch:** Perhatikan urutan LED yang menyala.
-2.  **Repeat:** Tekan tombol berwarna yang sesuai dengan urutan tadi.
-3.  Bertahanlah selama mungkin untuk mencapai level tertinggi\!
-
------
-
-## 🤝 Kontribusi
-
-Kontribusi adalah apa yang membuat komunitas open source menjadi tempat yang luar biasa untuk belajar, menginspirasi, dan berkreasi. Setiap kontribusi yang Anda buat **sangat dihargai**.
-
-1.  Fork Project ini.
-2.  Buat Branch Fitur baru (`git checkout -b feature/FiturKeren`).
-3.  Commit Perubahan Anda (`git commit -m 'Menambahkan FiturKeren'`).
-4.  Push ke Branch (`git push origin feature/FiturKeren`).
-5.  Buka Pull Request.
+```text
+Copyright (c) 2025 CherryYume夢
+```
