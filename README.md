@@ -72,12 +72,11 @@ Struktur file dalam repositori ini diatur untuk kemudahan penggunaan di Wokwi ma
 
 ```text
 📦 raspberry-pi-pico-simon-vault
- ┣ 📜 main.py           # 🧠 Logika utama program (Vault & Game Loop)
- ┣ 📜 pico_i2c_lcd.py   # 🔌 Driver library untuk mengontrol LCD via I2C
- ┣ 📜 diagram.json      # 🗺️ Konfigurasi wiring visual untuk simulasi Wokwi
- ┣ 📜 wokwi-project.txt # ⚙️ Metadata project Wokwi
- ┣ 📜 LICENSE           # ⚖️ Lisensi MIT
- ┗ 📜 README.md         # 📘 Dokumentasi project ini
+ ┣ 📜 main.py           
+ ┣ 📜 pico_i2c_lcd.py   
+ ┣ 📜 diagram.json      
+ ┣ 📜 LICENSE           
+ ┗ 📜 README.md        
 ````
 
 -----
@@ -126,25 +125,3 @@ Kontribusi adalah apa yang membuat komunitas open source menjadi tempat yang lua
 3.  Commit Perubahan Anda (`git commit -m 'Menambahkan FiturKeren'`).
 4.  Push ke Branch (`git push origin feature/FiturKeren`).
 5.  Buka Pull Request.
-
------
-
-## 📄 Lisensi
-
-Didistribusikan di bawah Lisensi MIT. Lihat `LICENSE` untuk informasi lebih lanjut.
-
-```text
-MIT License
-
-Copyright (c) 2025 CherryYume夢
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction...
-```
-
------
-
-\<p align="center"\>
-Dibuat dengan ❤️ menggunakan \<a href="https://micropython.org/"\>MicroPython\</a\> dan \<a href="https://wokwi.com/"\>Wokwi\</a\>.
-\</p\>
