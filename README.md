@@ -112,7 +112,7 @@ Saat program dimulai, layar menampilkan `-INPUT PASSWORD-`. Masukkan kode defaul
 * *Catatan Teknis:* Password didefinisikan dalam variabel `PASSWORD = [0, 2, 1, 3]` pada `main.py`, yang mereferensikan indeks pada list `btns`.
 
 ### Tahap 2: Bermain Simon Says
-Jika password benar, LCD akan menampilkan "SAFE OPEN" dan permainan dimulai.
+Jika password benar, LCD akan menampilkan "AKSES TERBUKA" dan permainan dimulai.
 1.  **Perhatikan (Watch):** LED akan menyala dengan urutan tertentu.
 2.  **Ulangi (Repeat):** Tekan tombol yang sesuai dengan warna LED tersebut.
 3.  **Skor:** Level Anda saat ini ditampilkan pada layar 7-Segment.
@@ -127,7 +127,6 @@ Jika password benar, LCD akan menampilkan "SAFE OPEN" dan permainan dimulai.
 ├── diagram.json        # Skema rangkaian untuk simulator Wokwi
 ├── main.py             # Logika utama (Boot, Vault System, Game Loop)
 ├── pico_i2c_lcd.py     # Library driver untuk I2C LCD
-├── wokwi-project.txt   # Metadata konfigurasi Wokwi
 └── README.md           # Dokumentasi proyek
 ````
 
@@ -139,5 +138,5 @@ Proyek ini didistribusikan di bawah lisensi **MIT**. Anda bebas menggunakan, mem
 Lihat file [LICENSE](https://www.google.com/search?q=./LICENSE) untuk detail lengkap.
 
 ```text
-Copyright (c) 2025 CherryYume夢
+Copyright (c) 2025 LiwiryaYM夢
 ```
