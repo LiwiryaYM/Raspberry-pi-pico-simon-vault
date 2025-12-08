@@ -41,7 +41,7 @@ Sistem ini memiliki dua mode operasi utama:
 ## 🛠 Teknologi yang Digunakan
 
 <p align="left">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Raspberry_Pi_-_Logo.svg" width="40" alt="Raspberry Pi" style="margin-right: 15px;"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Raspberrry_pi_logo.png" width="40" alt="Raspberry Pi" style="margin-right: 15px;"/>
   <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" width="40" alt="MicroPython" style="margin-right: 15px;"/>
   <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Wokwi.png" width="40" alt="Wokwi"/>
 </p>
@@ -89,7 +89,7 @@ Anda dapat langsung menjalankan proyek ini tanpa instalasi software apapun melal
 
 2.  **Clone Repository:**
     ```bash
-    git clone [https://github.com/liwiryaym/raspberry-pi-pico-simon-vault-.git](https://github.com/liwiryaym/raspberry-pi-pico-simon-vault-.git)
+    git clone https://github.com/liwiryaym/raspberry-pi-pico-simon-vault.git
     ```
 
 3.  **Upload File ke Pico:**
