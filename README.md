@@ -98,12 +98,12 @@ Struktur file dalam repositori ini diatur untuk kemudahan penggunaan di Wokwi ma
 
 #### Tahap 1: Membuka Brankas
 
-Layar akan menampilkan `-INPUT PASSWORD-`. Masukkan kode default berikut menggunakan tombol yang tersedia:
+Layar akan menampilkan `-MASUKAN PASSWORD-`. Masukkan kode default berikut menggunakan tombol yang tersedia:
 
 > **Password:** Tombol 1 → Tombol 3 → Tombol 2 → Tombol 4
 > (Urutan Pin: GP11 → GP13 → GP12 → GP10)
 
-  * ✅ **Sukses:** Layar LCD menampilkan "SAFE OPEN", 7-Segment menampilkan 'O', dan game dimulai.
+  * ✅ **Sukses:** Layar LCD menampilkan "AKSES TERBUKA", 7-Segment menampilkan 'O', dan game dimulai.
   * ❌ **Gagal:** Layar LCD menampilkan "ERROR", 7-Segment menampilkan 'E', silakan coba lagi.
 
 #### Tahap 2: Simon Says
