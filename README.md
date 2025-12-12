@@ -83,7 +83,7 @@ Konfigurasi pin berikut wajib diikuti untuk memastikan kompatibilitas dengan kod
 ### Langkah Instalasi
 1.  **Clone Repositori:**
     ```bash
-    git clone [https://github.com/liwiryaym/raspberry-pi-pico-simon-vault.git](https://github.com/liwiryaym/raspberry-pi-pico-simon-vault.git)
+    git clone https://github.com/liwiryaym/raspberry-pi-pico-simon-vault.git
     ```
 2.  **Unggah File:**
     Unggah file berikut ke direktori *root* Raspberry Pi Pico Anda:
