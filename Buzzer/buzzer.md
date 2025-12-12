@@ -57,6 +57,7 @@ def play_tone(freq, duration):
     time.sleep(duration)       # Tahan bunyi
     buzzer.duty_u16(0)         # Matikan suara
     time.sleep(0.05)           # Beri jeda sedikit
+```
 
 ⚙️ 3. Integrasi Logika (Logic Flow)
 Audio diintegrasikan ke dalam logika permainan yang dibuat oleh Liwirya dengan skenario berikut:
