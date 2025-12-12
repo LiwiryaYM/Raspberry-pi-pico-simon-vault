@@ -1,158 +1,121 @@
-# Raspberry Pi Pico: Simon Vault 🔐🎮
+<div align="center">
+  <img src="https://via.placeholder.com/150?text=Simon+Vault+Logo" alt="Simon Vault Logo" width="150" height="150" />
+  
+  # Raspberry Pi Pico: Simon Vault
+  
+  <p>
+    <b>Sistem Keamanan Brankas & Permainan Memori Berbasis MicroPython</b>
+  </p>
 
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
-![MicroPython](https://img.shields.io/badge/Language-MicroPython-blue)
-![Platform](https://img.shields.io/badge/Platform-Raspberry_Pi_Pico-red)
-
-**Simon Vault** adalah proyek sistem tertanam (*embedded system*) berbasis Raspberry Pi Pico yang menggabungkan keamanan digital dengan permainan memori klasik. Proyek ini mensimulasikan sistem brankas yang dilindungi password, di mana akses yang berhasil akan membuka permainan "Simon Says" interaktif.
-
-Proyek ini mendemonstrasikan penggunaan logika *State Machine*, komunikasi I2C (LCD), manipulasi GPIO kompleks (7-Segment & LED), serta modulasi PWM (Buzzer) menggunakan MicroPython.
-
----
-
-## 🌟 Fitur Utama
-
-* **Sistem Keamanan Ganda**:
-    * **Vault Mode**: Membutuhkan input PIN 4-digit yang benar melalui tombol fisik untuk membuka sistem.
-    * **Feedback Visual & Audio**: Indikator status (Locked/Unlocked/Error) melalui LCD dan suara buzzer yang berbeda.
-* **Permainan Simon Says**:
-    * Permainan memori visual dan audio yang dimulai otomatis setelah brankas terbuka.
-    * **Infinite Levels**: Kesulitan meningkat seiring bertambahnya skor pengguna.
-    * **Randomized Pattern**: Pola permainan dihasilkan secara acak setiap sesi.
-* **Antarmuka Hardware Lengkap**:
-    * **LCD 20x4 (I2C)**: Menampilkan instruksi, status, dan pesan game.
-    * **7-Segment Display**: Menampilkan masking input password dan skor permainan terkini.
-    * **RGB+Y LEDs**: Indikator visual untuk permainan.
+  <a href="https://micropython.org/">
+    <img src="https://img.shields.io/badge/Language-MicroPython-orange?style=flat-square&logo=python&logoColor=white" alt="MicroPython">
+  </a>
+  <a href="https://www.raspberrypi.com/products/raspberry-pi-pico/">
+    <img src="https://img.shields.io/badge/Hardware-Raspberry_Pi_Pico-red?style=flat-square&logo=raspberrypi&logoColor=white" alt="Raspberry Pi Pico">
+  </a>
+  <a href="https://wokwi.com/">
+    <img src="https://img.shields.io/badge/Simulator-Wokwi-blue?style=flat-square" alt="Wokwi">
+  </a>
+  <a href="./LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License">
+  </a>
+</div>
 
 ---
 
-## 🛠️ Teknologi & Hardware
+## 📝 Gambaran Proyek
 
-Proyek ini dibangun menggunakan teknologi berikut:
+**Simon Vault** menggabungkan konsep keamanan digital dengan hiburan interaktif. Proyek ini mensimulasikan mekanisme brankas elektronik yang dilindungi PIN, yang apabila berhasil dibuka, akan memberikan akses ke permainan memori klasik "Simon Says".
 
-* **Microcontroller**: Raspberry Pi Pico / Pico W
-* **Bahasa Pemrograman**: [MicroPython](https://micropython.org/)
-* **Komponen Hardware**:
-    * 1x I2C LCD (20x4 atau 16x2)
-    * 1x 7-Segment Display (Common Cathode)
-    * 4x Push Button (Pull-up)
-    * 4x LED (Merah, Hijau, Biru, Kuning)
-    * 1x Buzzer (PWM)
-* **Simulator**: Mendukung simulasi penuh di [Wokwi](https://wokwi.com/).
+Dirancang sebagai media pembelajaran *embedded system*, proyek ini mencakup implementasi:
+* **State Machine Logic** (Locked → Unlocked → Game Mode).
+* **Komunikasi I2C** untuk manajemen tampilan LCD.
+* **Handling GPIO Kompleks** (Input Matrix & Output LED/7-Segment).
+* **Pulse Width Modulation (PWM)** untuk sintesis audio sederhana.
 
 ---
 
-## 🔌 Konfigurasi Pin (Wiring)
+## ⚡ Fitur Utama
 
-Pastikan merangkai komponen sesuai dengan tabel berikut agar kode berjalan dengan benar:
+### 1. Sistem Keamanan (Vault Mode)
+* **PIN Protection**: Akses dilindungi oleh kombinasi 4 tombol unik.
+* **Secure Feedback**: Karakter input disamarkan (masked) pada layar LCD dan 7-Segment untuk privasi.
+* **Auto-Lock**: Sistem otomatis terkunci kembali saat reset atau *power cycle*.
 
-| Komponen | Pin Komponen | Raspberry Pi Pico (GP) |
+### 2. Permainan Interaktif (Game Mode)
+* **Infinite Progression**: Tingkat kesulitan (jumlah urutan) bertambah tanpa batas seiring keberhasilan pemain.
+* **Random Pattern Generation**: Pola permainan dihasilkan secara acak menggunakan *hardware timer entropy*.
+* **Audio-Visual Feedback**: Sinkronisasi antara nyala LED dan nada *buzzer* yang berbeda untuk setiap warna.
+
+---
+
+## 🔧 Spesifikasi Teknis
+
+Daftar teknologi dan perangkat keras yang digunakan dalam proyek ini:
+
+| Kategori | Komponen / Teknologi | Keterangan |
 | :--- | :--- | :--- |
-| **I2C LCD** | SDA | `GP4` |
-| | SCL | `GP5` |
-| **Tombol (Input)** | Tombol 1 | `GP11` |
-| | Tombol 2 | `GP12` |
-| | Tombol 3 | `GP13` |
-| | Tombol 4 | `GP10` |
-| **LED (Output)** | LED 1 (Merah) | `GP16` |
-| | LED 2 (Hijau) | `GP17` |
-| | LED 3 (Biru) | `GP18` |
-| | LED 4 (Kuning)| `GP19` |
-| **7-Segment** | Seg A, B, C | `GP0`, `GP1`, `GP6` |
-| | Seg D, E, F | `GP7`, `GP8`, `GP9` |
-| | Seg G | `GP14` |
-| **Buzzer** | PWM Pin | `GP20` |
+| **Microcontroller** | Raspberry Pi Pico W | Otak utama sistem |
+| **Bahasa** | MicroPython v1.20+ | *Logic* pemrograman |
+| **Display 1** | LCD 20x4 (I2C) | Antarmuka teks utama |
+| **Display 2** | 7-Segment (1-Digit) | Indikator level & masking |
+| **Input** | 4x Push Button | Navigasi & Input Game |
+| **Output** | 4x LED (R/G/B/Y) + Buzzer | Indikator Game & Suara |
 
 ---
 
-## 📥 Prasyarat & Instalasi
+## 🔌 Panduan Wiring
 
-### 1. Persiapan Environment
-* Pastikan Raspberry Pi Pico sudah di-flash dengan firmware **MicroPython** terbaru.
-* Gunakan IDE seperti **Thonny** atau **VS Code** (dengan ekstensi Pico-Go).
+Pastikan koneksi pin sesuai dengan tabel di bawah ini untuk fungsionalitas yang benar:
 
-### 2. Instalasi Kode
-Clone repository ini atau unduh file secara manual:
+### I2C LCD
+* **SDA**: `GP4`
+* **SCL**: `GP5`
 
-```bash
-git clone [https://github.com/username/raspberry-pi-pico-simon-vault.git](https://github.com/username/raspberry-pi-pico-simon-vault.git)
-````
+### Input (Tombol) & Output (LED)
+| Index | Tombol (Input) | LED (Output) | Warna |
+| :---: | :---: | :---: | :--- |
+| **1** | `GP11` | `GP16` | Merah |
+| **2** | `GP12` | `GP17` | Hijau |
+| **3** | `GP13` | `GP18` | Biru |
+| **4** | `GP10` | `GP19` | Kuning |
 
-### 3\. Upload File ke Pico
+### Indikator Tambahan
+* **7-Segment (A-G)**: `GP0`, `GP1`, `GP6`, `GP7`, `GP8`, `GP9`, `GP14`
+* **Buzzer (PWM)**: `GP20`
 
-Salin file-file berikut ke direktori *root* Raspberry Pi Pico Anda:
+---
 
-  * `main.py` (Logika utama program)
-  * `pico_i2c_lcd.py` (Library driver LCD)
-  * `buzzer_lib.py` (Library nada buzzer)
+## 🚀 Instalasi & Penggunaan
 
------
+### Prasyarat
+1.  **Python Environment**: Thonny IDE atau VS Code.
+2.  **Firmware**: MicroPython terbaru terpasang pada Pico.
 
-## 📖 Cara Penggunaan
+### Langkah Instalasi
+1.  **Clone Repository**:
+    ```bash
+    git clone [https://github.com/liwiryaym/raspberry-pi-pico-simon-vault.git](https://github.com/liwiryaym/raspberry-pi-pico-simon-vault.git)
+    ```
+2.  **Upload File**:
+    Salin file `main.py`, `pico_i2c_lcd.py`, dan `buzzer_lib.py` ke direktori root Pico.
 
-1.  **Menyalakan Sistem**:
-    Hubungkan Pico ke sumber daya. LCD akan menampilkan pesan untuk memasukkan password.
+### Cara Bermain
+1.  **Buka Kunci**: Saat layar menampilkan "INPUT PASSWORD", masukkan urutan:
+    > **Tombol 1 → Tombol 3 → Tombol 2 → Tombol 4**
+2.  **Mulai Game**: Setelah akses terbuka, ikuti pola nyala lampu LED.
+3.  **Input Ulang**: Tekan tombol sesuai urutan lampu yang menyala.
+4.  **Skor**: Level Anda saat ini akan ditampilkan pada layar 7-Segment.
 
-2.  **Membuka Brankas (Unlock)**:
-    Masukkan kode default dengan menekan tombol secara berurutan:
+---
 
-    > **Password:** Tombol 1 ➔ Tombol 3 ➔ Tombol 2 ➔ Tombol 4
-
-      * Setiap tekanan tombol akan menampilkan karakter `*` pada LCD dan garis pada 7-segment.
-      * Jika benar: LCD menampilkan "AKSES TERBUKA" dan permainan dimulai.
-      * Jika salah: Buzzer berbunyi nada error dan sistem mereset input.
-
-3.  **Bermain Simon Says**:
-
-      * Perhatikan urutan nyala LED dan suaranya.
-      * Ulangi urutan tersebut dengan menekan tombol yang sesuai (Tombol 1 untuk LED 1, dst).
-      * Jika benar, level naik dan urutan bertambah panjang.
-      * Skor level Anda ditampilkan di layar 7-Segment.
-
------
-
-## 📂 Struktur Project
-
-```text
-.
-├── main.py             # Entry point: Logika utama Vault & Game
-├── buzzer_lib.py       # Modul helper untuk nada dan frekuensi buzzer
-├── pico_i2c_lcd.py     # Driver class untuk mengontrol LCD via I2C
-├── diagram.json        # File konfigurasi untuk simulasi Wokwi
-├── README.md           # Dokumentasi proyek
-└── LICENSE             # Lisensi MIT
-```
-
------
-
-## 🤝 Kontribusi
-
-Kontribusi sangat terbuka\! Jika Anda ingin meningkatkan fitur atau memperbaiki bug:
-
-1.  Fork repository ini.
-2.  Buat branch fitur baru (`git checkout -b fitur-keren`).
-3.  Commit perubahan Anda (`git commit -m 'Menambahkan fitur keren'`).
-4.  Push ke branch tersebut (`git push origin fitur-keren`).
-5.  Buat Pull Request.
-
------
-
-## 📄 Lisensi
-
-Proyek ini didistribusikan di bawah lisensi **MIT**.
+## 📂 Struktur Direktori
 
 ```text
-Copyright (c) 2025 CherryYume夢
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-```
-
-Lihat file [LICENSE](https://www.google.com/search?q=./LICENSE) untuk informasi lebih lanjut.
+raspberry-pi-pico-simon-vault/
+├── main.py             # Program utama (Logic, Game Loop)
+├── buzzer_lib.py       # Library kontrol nada & frekuensi
+├── pico_i2c_lcd.py     # Driver LCD I2C
+├── diagram.json        # Skema simulasi (Wokwi)
+├── LICENSE             # Dokumen Lisensi MIT
+└── README.md           # Dokumentasi Proyek
