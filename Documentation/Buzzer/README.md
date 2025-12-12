@@ -1,5 +1,4 @@
 # 📘 Dokumentasi : Buzzer
-**Project by: Liwirya**
 
 ![Banner](https://img.shields.io/badge/Status-Documentation-blue?style=for-the-badge&logo=markdown)
 ![Hardware](https://img.shields.io/badge/Hardware-Raspberry_Pi_Pico-red?style=for-the-badge&logo=raspberrypi)
@@ -82,6 +81,4 @@ SOFTWARE.
 
 -----
 
-**© Logic & Documentation by Liwirya**
-
-```
+**© Documentation by Liwirya**
