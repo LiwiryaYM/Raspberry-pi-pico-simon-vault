@@ -118,6 +118,13 @@
       "top": -320,
       "left": -388,
       "attrs": { "pins": "i2c" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": 93.6,
+      "left": 230.4,
+      "attrs": { "volume": "0.1" }
     }
   ],
   "connections": [
@@ -153,7 +160,9 @@
     [ "lcd2:SDA", "pico:GP4", "orange", [ "h-38.4", "v662.6", "h441.6", "v-332.85" ] ],
     [ "sevseg1:C", "pico:GP6", "green", [ "v412.8", "h508.8", "v-428.85" ] ],
     [ "sevseg1:D", "pico:GP7", "green", [ "v384", "h508.8", "v-390.45" ] ],
-    [ "pico:GP8", "sevseg1:E", "green", [ "h138", "v342.45", "h-633.6", "v-345.6" ] ]
+    [ "pico:GP8", "sevseg1:E", "green", [ "h138", "v342.45", "h-633.6", "v-345.6" ] ],
+    [ "bz1:2", "pico:GP20", "red", [ "v0" ] ],
+    [ "bz1:1", "pico:GND.5", "black", [ "v0" ] ]
   ],
   "dependencies": {}
 }
