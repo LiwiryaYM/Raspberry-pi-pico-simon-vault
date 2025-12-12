@@ -10,20 +10,20 @@ class I2cLcd:
         self.num_columns = num_columns
         
         time.sleep_ms(20)
-        self.write_nibble(0x03) 
-        time.sleep_ms(5)
-        self.write_nibble(0x03) 
+        self.write_nibble(0x03)
         time.sleep_ms(5)
         self.write_nibble(0x03)
         time.sleep_ms(5)
-        self.write_nibble(0x02)
+        self.write_nibble(0x03)
+        time.sleep_ms(5)
+        self.write_nibble(0x02) 
         time.sleep_ms(5)
         
         self.send_command(0x28) 
-        self.send_command(0x08)
+        self.send_command(0x08) 
         self.send_command(0x01) 
         time.sleep_ms(2)
-        self.send_command(0x06)
+        self.send_command(0x06) 
         self.send_command(0x0C) 
 
     def write_nibble(self, data):
@@ -34,10 +34,8 @@ class I2cLcd:
     def send_byte(self, data, mode):
         high = mode | (data & 0xF0) | self.backlight_val
         low = mode | ((data << 4) & 0xF0) | self.backlight_val
-        
         self.i2c.writeto(self.i2c_addr, bytearray([high | 0x04]))
         self.i2c.writeto(self.i2c_addr, bytearray([high]))
-        
         self.i2c.writeto(self.i2c_addr, bytearray([low | 0x04]))
         self.i2c.writeto(self.i2c_addr, bytearray([low]))
 
