@@ -1,9 +1,7 @@
 # Buzzer Implementasi
 **Credit by: Liwirya**
 
-Dokumentasi ini menjelaskan cara kerja dan implementasi fitur **Audio Feedback (Buzzer)** yang telah ditambahkan ke dalam sistem keamanan brankas (Safe Lock) yang terintegrasi dengan permainan memori (Simon Game).
-
----
+Dokumentasi ini menjelaskan cara kerja dan implementasi fitur **Audio Feedback (Buzzer)** yang terintegrasi dengan permainan memori (Simon Game).
 
 ## 🛠️ 1. Hardware: Modul Audio (Buzzer)
 
